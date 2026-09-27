@@ -40,6 +40,7 @@ const Hero = () => {
               src={heroBanner}
               alt="FitLog workout"
               fill
+              priority
               className="object-contain"
             />
           </div>

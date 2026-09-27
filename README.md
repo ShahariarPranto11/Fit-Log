@@ -41,3 +41,20 @@ src
 ├── components
 ├── assets
 └── types
+
+## Key Features
+
+1. **Workout Library**
+   - Browse workouts with images, muscle groups, equipment, duration, calories, and ratings.
+
+2. **Workout Details**
+   - View detailed workout information including description, specifications, and step-by-step instructions.
+
+3. **Today's Plan**
+   - Add workouts to today's plan and manage up to five exercises.
+
+4. **Save Workouts**
+   - Save favorite workouts for later and access them from the Saved section.
+
+5. **Responsive Design**
+   - Fully responsive layout that works across mobile, tablet, and desktop devices.
