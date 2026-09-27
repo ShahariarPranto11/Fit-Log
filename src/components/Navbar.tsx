@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const Navbar = () => {
@@ -11,13 +12,18 @@ const Navbar = () => {
 
   const [planCount, setPlanCount] = useState(0);
   const [savedCount, setSavedCount] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const updateCounts = () => {
       try {
-        const plan = JSON.parse(localStorage.getItem("fitlog-plan") || "[]");
+        const plan = JSON.parse(
+          localStorage.getItem("fitlog-plan") || "[]"
+        );
 
-        const saved = JSON.parse(localStorage.getItem("fitlog-saved") || "[]");
+        const saved = JSON.parse(
+          localStorage.getItem("fitlog-saved") || "[]"
+        );
 
         setPlanCount(Array.isArray(plan) ? plan.length : 0);
         setSavedCount(Array.isArray(saved) ? saved.length : 0);
@@ -40,16 +46,25 @@ const Navbar = () => {
 
   return (
     <nav className="sticky top-0 z-40 border-b border-zinc-800 bg-black">
+      {/* Main Navbar */}
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-4">
+        
         {/* Logo */}
         <Link href="/" className="flex shrink-0 items-center gap-2">
-          <Image src={logo} alt="FitLog Logo" width={35} height={35} />
+          <Image
+            src={logo}
+            alt="FitLog Logo"
+            width={35}
+            height={35}
+          />
 
-          <span className="font-bold text-white">FITLOG</span>
+          <span className="font-bold text-white">
+            FITLOG
+          </span>
         </Link>
 
-        {/* Navigation */}
-        <div className="flex items-center gap-4 sm:gap-6">
+        {/* Desktop Navigation */}
+        <div className="hidden items-center gap-4 sm:gap-6 md:flex">
           <Link
             href="/"
             className={`text-sm font-semibold transition ${
@@ -73,8 +88,8 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Plan and Saved Counters */}
-        <div className="flex shrink-0 items-center gap-2">
+        {/* Desktop Counters */}
+        <div className="hidden shrink-0 items-center gap-2 md:flex">
           <Link
             href="/my-plan"
             className="rounded-full bg-[#ccff00] px-3 py-1.5 text-xs font-bold text-black transition hover:bg-white sm:text-sm"
@@ -89,7 +104,69 @@ const Navbar = () => {
             Saved {savedCount}
           </Link>
         </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="text-white md:hidden"
+          aria-label="Toggle menu"
+        >
+          {menuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="border-t border-zinc-800 px-4 py-4 md:hidden">
+          <div className="mx-auto flex max-w-7xl flex-col gap-4">
+            
+            {/* Workouts */}
+            <Link
+              href="/"
+              onClick={() => setMenuOpen(false)}
+              className={`text-sm font-semibold ${
+                pathname === "/"
+                  ? "text-[#ccff00]"
+                  : "text-zinc-400 hover:text-white"
+              }`}
+            >
+              Workouts
+            </Link>
+
+            {/* My Plan */}
+            <Link
+              href="/my-plan"
+              onClick={() => setMenuOpen(false)}
+              className={`text-sm font-semibold ${
+                pathname === "/my-plan"
+                  ? "text-[#ccff00]"
+                  : "text-zinc-400 hover:text-white"
+              }`}
+            >
+              My Plan
+            </Link>
+
+            {/* Mobile Counters */}
+            <div className="flex gap-2 pt-2">
+              <Link
+                href="/my-plan"
+                onClick={() => setMenuOpen(false)}
+                className="rounded-full bg-[#ccff00] px-3 py-1.5 text-xs font-bold text-black"
+              >
+                Plan {planCount}
+              </Link>
+
+              <Link
+                href="/my-plan"
+                onClick={() => setMenuOpen(false)}
+                className="rounded-full border border-zinc-600 px-3 py-1.5 text-xs font-semibold text-zinc-300"
+              >
+                Saved {savedCount}
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
     </nav>
   );
 };
