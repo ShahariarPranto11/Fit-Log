@@ -1,4 +1,3 @@
-
 import { Workout } from "@/types/workout";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,13 +14,12 @@ const WorkoutCard = ({ workout }: WorkoutCardProps) => {
       className="group block overflow-hidden border border-zinc-800 bg-zinc-900 transition hover:border-[#ccff00]"
     >
       {/* Workout Image */}
-      <div className="relative h-52 overflow-hidden">
+      <div className="relative h-52">
         <Image
           src={workout.image}
           alt={workout.name}
           fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover transition duration-500 group-hover:scale-105"
+          className="object-cover"
         />
       </div>
 
@@ -45,9 +43,7 @@ const WorkoutCard = ({ workout }: WorkoutCardProps) => {
         </h3>
 
         {/* Equipment */}
-        <p className="mt-2 text-sm text-zinc-400">
-          {workout.equipment}
-        </p>
+        <p className="mt-2 text-sm text-zinc-400">{workout.equipment}</p>
 
         {/* Stats */}
         <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-zinc-800 pt-4 text-sm text-zinc-400">

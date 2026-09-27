@@ -135,7 +135,7 @@ const WorkoutDetails = () => {
         </div>
       )}
 
-      <section className="mx-auto max-w-7xl px-4 py-10">
+      <section className="mx-auto max-w-7xl px-4 py-8 md:py-10">
         {/* Back Button */}
         <button
           onClick={() => router.back()}
@@ -147,7 +147,7 @@ const WorkoutDetails = () => {
 
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
           {/* Left: Workout Image */}
-          <div className="relative min-h-87.5 overflow-hidden border border-zinc-800 lg:min-h-[600px]">
+          <div className="relative h-80 overflow-hidden border border-zinc-800 sm:h-96 lg:h-[600px]">
             <Image
               src={workout.image}
               alt={workout.name}
